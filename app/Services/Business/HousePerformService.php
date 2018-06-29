@@ -6,6 +6,7 @@
  * Time: 上午10:28
  */
 namespace App\Services\Business;
+use App\Incl\Business\Package;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Redis;
 
@@ -21,10 +22,18 @@ class HousePerformService extends BaseService{
         return self::$self;
     }
 
-    public function setUserLetter(){
+    public function setUserPackage(){
+        //校验
+        //写入user package list
+        //写如 package asort
+
+        $result = Package::instance()->setUserPackage();
         $name = Redis::smembers('mytest');
 
-        var_dump('set' ,$name);die;
+    }
+
+    public function writeMessage(){
+
     }
 
 

@@ -6,6 +6,8 @@
  * Time: 上午10:28
  */
 namespace App\Services\Business;
+use App\Incl\Business\Package;
+use App\Incl\Business\Player;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
@@ -23,12 +25,16 @@ class HouseService extends BaseService{
     }
 
     public function say(){
-
-        $users = DB::select('select * from explore_player');
-        var_dump(json_encode($users));die;
+        $name = Package::instance()->getName($_REQUEST['name']);
+        return $name;
     }
 
-    public function getUserLetters(){
+    public function getTheOnePackage(){
+
+    }
+
+
+    public function getUserMessage(){
 
     }
 

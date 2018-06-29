@@ -14,19 +14,24 @@ use App\Incl\BaseObject;
 class Package extends BaseObject
 {
     const cache_expire_time = 10000;
-    public $fields = ['user_id','authority','read_info','created_at'];
+//    public $fields = ['user_id','read_count','read_info', 'content','created_at' ,'updated_at'];
+    public static $self = null;
+    public $name = null;
 
-    public function __construct()
-    {
-        parent::__construct();
+
+
+    public static function instance(){
+        if(self::$self==null){
+            self::$self = new self();
+        }
+
+        return self::$self;
     }
 
-    public static function get($user_id){
-        return new self();
+    public function getName($name){
+        $this->name = $name;
+        return array('data'=>$this->name);
     }
 
-    public function setCache(){
-        echo 'set';die;
-    }
 
 }

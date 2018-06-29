@@ -16,7 +16,7 @@ class BaseObject
 
     public function __construct()
     {
-        var_dump('as',$this);die;
+//        var_dump('as',$this);die;
     }
 
 
