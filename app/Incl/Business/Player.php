@@ -16,6 +16,9 @@ class Player extends BaseObject
 
 //    public $fields = ['user_id' ,'name','age','sex','created_at','updated_at'];
 
+    public static function get(){
+
+    }
 
     public function setUserPackage(){
 

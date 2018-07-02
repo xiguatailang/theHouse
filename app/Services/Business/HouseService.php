@@ -25,8 +25,7 @@ class HouseService extends BaseService{
     }
 
     public function say(){
-        $name = Package::instance()->getName($_REQUEST['name']);
-        return $name;
+        return array('data'=>'hello');
     }
 
     public function getTheOnePackage(){
@@ -34,7 +33,7 @@ class HouseService extends BaseService{
     }
 
 
-    public function getUserMessage(){
+    public function getUserMessage($user_id){
 
     }
 

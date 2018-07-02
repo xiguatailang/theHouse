@@ -19,18 +19,58 @@ class Package extends BaseObject
     public $name = null;
 
 
-
-    public static function instance(){
-        if(self::$self==null){
-            self::$self = new self();
-        }
-
-        return self::$self;
-    }
-
     public function getName($name){
         $this->name = $name;
         return array('data'=>$this->name);
+    }
+
+
+    public static function getProperUserPackage(){
+
+    }
+
+    public static function insertPackagePool(){
+
+    }
+
+    public static function getUserPackageList($user_id){
+
+    }
+
+    public static function insertUserPackageList($user_id){
+
+    }
+
+    public static function getMessagePool(){
+
+    }
+
+    public static function insertMessagePool(){
+
+    }
+
+    public static function getUserMessageInbox($user_id){
+
+    }
+
+    public static function insertUserMessageInbox($user_id){
+
+    }
+
+    public static function getUserMessageOutbox($user_id){
+
+    }
+
+    public static function insertUserMessageOutbox($user_id){
+
+    }
+
+    public static function readOwnRightPackageBox($user_id){
+
+    }
+
+    public static function setOwnRightPackageBox($user_id){
+
     }
 
 

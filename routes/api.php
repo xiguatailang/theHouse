@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Help\UserFilter;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/house/{method}', 'UserController@distributor');
-Route::post('/house/{method}', 'UserController@postDistributor');
+Route::group(['middleware','UserFilter'] ,function (){
+    Route::get('/house/{method}', 'UserController@distributor');
+    Route::post('/house/{method}', 'UserController@distributor');
+});
+
 
