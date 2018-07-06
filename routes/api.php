@@ -17,9 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware','UserFilter'] ,function (){
-    Route::get('/house/{method}', 'UserController@distributor');
-    Route::post('/house/{method}', 'UserController@distributor');
+
+Route::post('/register', 'HouseController@register');
+Route::post('/login', 'HouseController@login');
+Route::group(['middleware','filter'] ,function (){
+    Route::any('/house/{method}', 'HouseController@distributor');
 });
 
 

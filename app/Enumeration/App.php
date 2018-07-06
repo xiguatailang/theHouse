@@ -18,4 +18,13 @@ class App
 
     const THE_NUM_ONE = 10000000000;
 
+
+    //业务处理返回状态码
+    const BUSINESS_EXCEPTION_CODE = 900;
+    const BUSINESS_SUCCESS_CODE = 200;
+
+
+    const USER_LOGIN_KEY = 'login';
+    const USER_LOGIN_EXPIRE_TIME = 3600;
+
 }

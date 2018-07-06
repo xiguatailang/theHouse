@@ -12,6 +12,20 @@ namespace App\Help;
 class HouseValid
 {
 
+    public static function validPassWord($passWord){
 
+        return true;
+    }
+
+    public static function resolvePassWord($passWord){
+
+
+        return $passWord;
+    }
+
+    public static function validUserName($name){
+
+        return true;
+    }
 
 }

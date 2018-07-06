@@ -11,12 +11,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public $params = array(
-        'user_id'=>App::THE_NUM_ONE,
-        'name'=>'napple',
-    );
 
-    public function setParams($key ,$val){
-        $this->params[$key] = $val;
+    public $params = null;
+
+    public function __construct()
+    {
+        $this->params = $_REQUEST;
     }
+
+    public static function restResp($data = '' ,$msg = '' ,$code = App::BUSINESS_SUCCESS_CODE ,$status = 200){
+
+        return response()->json(array('data'=>$data ,'code'=>$code ,'msg'=>$msg) ,$status);
+    }
+
 }
