@@ -20,8 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', 'HouseController@register');
 Route::post('/login', 'HouseController@login');
-Route::group(['middleware','filter'] ,function (){
-    Route::any('/house/{method}', 'HouseController@distributor');
+//Route::post('/login', function (){
+//    return response('hello world enen' ,200)->cookie('login_in',1101,10);
+//});
+
+
+Route::any('/house/{method}', 'HouseController@distributor')->middleware('filter');
+
+
+Route::get('/loginTest', function (){
+    return response('hello world' ,200)->cookie('login_in',1101,10);
 });
 
 

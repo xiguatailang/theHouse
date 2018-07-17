@@ -24,7 +24,7 @@ class HouseController extends Controller
     }
 
 
-    public function login(){
+    public function login(Request $request){
         //校验用户名密码是否在库里
         if(isset($this->params['password']) && isset($this->params['name'])){
             $passWord = HouseValid::resolvePassWord($this->params['password']);
@@ -37,10 +37,16 @@ class HouseController extends Controller
                 return self::restResp('' ,'invalid user name' ,App::BUSINESS_EXCEPTION_CODE);
             }
 
-            $user = DB::select('select * from user where name = ? and password=?', [$this->params['name'] , $this->params['password']]);
+            var_dump($request->header('tokenhh'));die;
+
+            $user = DB::select('select * from user where name = ? and password=?', [$this->params['name'], $this->params['password']]);
+
             if($user){
                 //TODO  生成cookie，cookie可以包含user_id      将cookie值存入缓存
-                return response()->json(array('data'=>'' ,'code'=> App::BUSINESS_SUCCESS_CODE ,'msg'=>'login_success') ,200);
+                $user_id = $user[0]->user_id;
+//                $user_cookie = Cookie::make('user_login',10000,10);
+
+                return response()->json(array('data'=>'' ,'code'=> App::BUSINESS_SUCCESS_CODE ,'msg'=>'login__en_success') ,200)->header('Access-Control-Expose-Headers','token')->header('token',1002);
             }else{
                 return self::restResp('' ,'account and password are incorrect' ,App::BUSINESS_EXCEPTION_CODE);
             }
