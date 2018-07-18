@@ -7,6 +7,8 @@
  */
 
 namespace App\Incl;
+use Illuminate\Support\Facades\Redis;
+
 
 
 class BaseObject
@@ -16,7 +18,17 @@ class BaseObject
 
     public function __construct()
     {
-//        var_dump('as',$this);die;
+
+    }
+
+    public static function getCacheListData($cache_key){
+
+        $length = Redis::LLEN($cache_key);
+        if ($data = Redis::LRANGE($cache_key, 0, $length)) {
+            return $data;
+        }
+
+        return array();
     }
 
 
