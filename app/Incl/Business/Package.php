@@ -186,7 +186,7 @@ class Package extends BaseObject
 
 
     public static function readOwnRightPackageBox($user_id){
-        
+
     }
 
     public static function setOwnRightPackageBox($user_id){
