@@ -24,8 +24,13 @@ class HouseService extends BaseService{
         return self::$self;
     }
 
-    public function say(){
-        return array('data'=>'hello');
+    public function setUserPackage(){
+        //校验
+        //写入user package list
+        //写如 package asort
+        $user_id = Player::getUserId();
+        var_dump($user_id);die;
+
     }
 
     public function getTheOnePackage(){

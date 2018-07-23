@@ -26,9 +26,7 @@ class HousePerformService extends BaseService{
         //校验
         //写入user package list
         //写如 package asort
-
-        $result = Package::instance()->setUserPackage();
-        $name = Redis::smembers('mytest');
+        var_dump('in',$_REQUEST);die;
 
     }
 

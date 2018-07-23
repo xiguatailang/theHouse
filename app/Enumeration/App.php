@@ -24,7 +24,7 @@ class App
     const BUSINESS_SUCCESS_CODE = 200;
 
 
-    const USER_LOGIN_KEY = 'login';
+    const USER_LOGIN_KEY = 'login_token';
     const USER_LOGIN_EXPIRE_TIME = 3600;
 
 }

@@ -7,6 +7,7 @@
  */
 namespace Tests\Unit;
 
+use App\Help\Algorithm;
 use App\Incl\Business\Package;
 use Tests\TestCase;
 class HouseApiTest extends TestCase{
@@ -22,7 +23,11 @@ class HouseApiTest extends TestCase{
 //        $this->insertUserMessageOutbox();
 //        $this->getUserMessageOutbox();
 //        $this->getUserMessageInbox();
-        $this->readerUserMessage();
+//        $this->readerUserMessage();
+//        $this->makeSecret();
+//        $this->decodeSecret();
+//        $this->tokenEncrypt();
+        $this->tokenDecrypt();
     }
 
 
@@ -62,8 +67,29 @@ class HouseApiTest extends TestCase{
     }
 
     public function readerUserMessage(){
-        $data = Package::readerUserMessage($this->user_id ,$this->reader ,0);
+        $data = Package::setUserMessagePool($this->user_id ,$this->reader ,0);
         echo "\n".json_encode($data);
+    }
+
+    public function makeSecret(){
+        $id = 1000000000;
+        echo "\n".base64_encode($id);
+    }
+
+    public function decodeSecret(){
+        $cont = 'MzEzMTAwMDAwMDAwMDA4MDg=';
+        echo "\n".base64_decode($cont);
+    }
+
+    public function tokenEncrypt(){
+        $data = Algorithm::tokenEncrypt($this->user_id);
+        echo "\n".$data;
+    }
+
+    public function tokenDecrypt(){
+        $token = 'MAEzMTAwMDAwMDAwMAADAMNZZM4MD';
+        $data = Algorithm::tokenDecrypt($token);
+        echo "\n".$data;
     }
 
 }

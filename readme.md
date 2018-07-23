@@ -9,5 +9,8 @@
 <p>user_message_inbox   list</p>
 <p>user_message_outbox   list</p>
 <p>message_pool   hash 存储message动态属性。如is_reader,read_time</p>
+
 <p>user_proper_message_list   list 存储message动态属性。如is_reader,read_time</p>
 <p>proper_message_pool   hash 存储message动态属性。如is_reader,read_time</p>
+
+
