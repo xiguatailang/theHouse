@@ -17,7 +17,7 @@ class HouseApiTest extends TestCase{
 
     public function testInit(){
 
-//        $this->insertUserPackageList();
+        $this->insertUserPackageList();
 //        $this->getUserPackageList();
 //        $this->getProperUserPackage();
 //        $this->insertUserMessageOutbox();

@@ -21,16 +21,15 @@ class BaseObject
 
     }
 
-    public static function getCacheListData($cache_key ,$type=true){
+    public static function getCacheListData($cache_key ,$offset=true){
 
-        $length = Redis::LLEN($cache_key);
-
-        if($type) {
+        if(!is_numeric($offset)) {
+            $length = Redis::LLEN($cache_key);
             if ($data = Redis::LRANGE($cache_key, 0, $length)) {
                 return $data;
             }
         }else{
-            return Redis::LINDEX($cache_key ,$length-1);
+            return Redis::LINDEX($cache_key ,$offset);
         }
 
         return array();

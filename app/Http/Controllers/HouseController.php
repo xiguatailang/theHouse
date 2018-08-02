@@ -7,7 +7,6 @@ use App\Help\Algorithm;
 use App\Help\HouseValid;
 use Illuminate\Http\Request;
 use App\Services\Business;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
@@ -37,8 +36,11 @@ class HouseController extends Controller
             if(!HouseValid::validUserName($this->params['name'])){
                 return self::restResp('' ,'invalid user name' ,App::BUSINESS_EXCEPTION_CODE);
             }
-
-            $user = DB::select('select * from user where name = ? and password=?', [$this->params['name'], $this->params['password']]);
+            try {
+                $user = DB::select('select * from user where name = ? and password=?', [$this->params['name'], $this->params['password']]);
+            }catch (\Exception $exception){
+                $user = array();
+            }
 
             if($user){
                 $user_id = $user[0]->user_id;
@@ -86,6 +88,7 @@ class HouseController extends Controller
         $result['status'] = isset($result['status']) ? $result['status'] : 200;
         $result['code'] = isset($result['code']) ? $result['code'] : App::BUSINESS_SUCCESS_CODE;
         $result['msg'] = isset($result['msg']) ? $result['msg'] : '';
+        $result['data'] = isset($result['data']) ? $result['data'] : array();
 
         return response()->json(array('data'=>$result['data'] ,'code'=>$result['code'] ,'msg'=>$result['msg']) ,$result['status']);
     }

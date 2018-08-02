@@ -28,4 +28,13 @@ class HouseValid
         return true;
     }
 
+
+    /**
+     * @return array
+     */
+    public static function validContent($content){
+
+        return array('result'=>true,'msg'=>'','content'=>htmlspecialchars($content));
+    }
+
 }

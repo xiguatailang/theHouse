@@ -17,8 +17,8 @@ class Package extends BaseObject
 {
     const cache_expire_time = 10000;
 
-    const PUBLIC = 1;
-    const PRIVATE = 0;
+    const PUBLIC = 0;
+    const PRIVATE = 1;
 
     const USER_PACKAGE_LIST = 'package_list';
     const USER_PACKAGE_POOL = 'package_pool';
@@ -49,10 +49,18 @@ class Package extends BaseObject
         if ($data = Redis::ZREVRANGEBYSCORE(self::USER_PACKAGE_POOL, INF, -INF)) {
             $target = array_pop($data);
             $target = explode('_', $target);
-            $cache_list_key = self::USER_PACKAGE_LIST . '_' . $target[0];
-            $content = Redis::LINDEX($cache_list_key, $target[1]);
+            if($target[0] != Player::getUserId()) {
+                $cache_list_key = self::USER_PACKAGE_LIST . '_' . $target[0];
+                $content = Redis::LINDEX($cache_list_key, $target[1]);
+                return array('user' => $target[0], 'content' => $content ,'offset'=>$target[1]);
+            }elseif ($data){
+                $target = array_pop($data);
+                $target = explode('_', $target);
+                $cache_list_key = self::USER_PACKAGE_LIST . '_' . $target[0];
+                $content = Redis::LINDEX($cache_list_key, $target[1]);
+                return array('user' => $target[0], 'content' => $content ,'offset'=>$target[1]);
+            }
 
-            return array('user' => $target[0], 'content' => $content);
         }
 
         return array();
@@ -79,10 +87,10 @@ class Package extends BaseObject
      * @param $user_id
      * @return array
      */
-    public static function getUserPackageList($user_id)
+    public static function getUserPackageList($user_id ,$offset=true)
     {
         $cache_list_key = self::USER_PACKAGE_LIST . '_' . $user_id;
-        return self::getCacheListData($cache_list_key);
+        return self::getCacheListData($cache_list_key ,$offset);
     }
 
     /**
@@ -100,6 +108,7 @@ class Package extends BaseObject
             'time'=>time(),
             'type'=>$type,
         );
+
         if ($type==self::PUBLIC && $offset = Redis::RPUSH($cache_list_key, json_encode($content))) {
             return self::insertPackagePool($user_id, $offset - 1);
         }
@@ -160,10 +169,10 @@ class Package extends BaseObject
      * @param $user_id
      * @return array
      */
-    public static function getUserMessageOutbox($user_id)
+    public static function getUserMessageOutbox($user_id ,$offset=true)
     {
         $cache_list_key = self::USER_MESSAGE_OUTBOX . '_' . $user_id;
-        return self::getCacheListData($cache_list_key);
+        return self::getCacheListData($cache_list_key ,$offset);
     }
 
     /**
@@ -174,13 +183,14 @@ class Package extends BaseObject
      * @param $packageOffset
      * @return bool|mixed
      */
-    public static function insertUserMessageOutbox($write, $cotent, $read, $packageOffset)
+    public static function insertUserMessageOutbox($write, $cotent, $read, $packageOffset ,$package_owner)
     {
         $cache_message_key = self::USER_MESSAGE_OUTBOX . '_' . $write;
         $insert = array(
             'content' => $cotent,
             'reader' => $read,
             'package_offset' => $packageOffset,
+            'package_owner' => $package_owner,
             'write_time'=>time(),
         );
         if ($message_offset = Redis::RPUSH($cache_message_key, json_encode($insert))) {
@@ -191,10 +201,10 @@ class Package extends BaseObject
     }
 
 
-    public static function getUserProperPackage($user_id){
-        $cache_message_key = self::USER_PROPER_PACKAGE . '_' . $user_id;
-        return self::getCacheListData($cache_message_key ,false);
-    }
+//    public static function getUserProperPackage($user_id){
+//        $cache_message_key = self::USER_PROPER_PACKAGE . '_' . $user_id;
+//        return self::getCacheListData($cache_message_key ,false);
+//    }
 
     public static function insertUserProperPackage($writer ,$reader ,$packageOffset){
         $cache_message_key = self::USER_PROPER_PACKAGE . '_' . $reader;

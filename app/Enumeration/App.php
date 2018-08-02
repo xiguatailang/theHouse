@@ -11,10 +11,10 @@ namespace App\Enumeration;
 
 class App
 {
-    const HTTP_GET_METHOD = 'get';
-    const HTTP_POST_METHOD = 'post';
-    const HTTP_PUT_METHOD = 'put';
-    const HTTP_DELETE_METHOD = 'delete';
+    const HTTP_GET_METHOD = 'GET';
+    const HTTP_POST_METHOD = 'POST';
+    const HTTP_PUT_METHOD = 'PUT';
+    const HTTP_DELETE_METHOD = 'DELETE';
 
     const THE_NUM_ONE = 10000000000;
 
