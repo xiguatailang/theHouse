@@ -50,9 +50,15 @@ class HouseController extends Controller
                     'token'=>$token,
                     'name'=>$user[0]->name,
                     'sex'=>$user[0]->sex,
+                    'packages'=>null,
+                    'messages'=>null,
                 );
                 Redis::set(App::USER_LOGIN_KEY.'_'.$user_id ,json_encode($user_tmp));
+                //TODO 同一个key，再次set之后会刷新过期时间。如果不设置过期时间则不会过期
                 Redis::Expire(App::USER_LOGIN_KEY.'_'.$user_id ,App::USER_LOGIN_EXPIRE_TIME);
+
+                //将用户id加入登陆缓存池，后面异步load用户package和message数据
+                Redis::LPUSH(App::LOGIN_POOL,$user_id);
 
                 return response()->json(array('data'=>'' ,'code'=> App::BUSINESS_SUCCESS_CODE ,'msg'=>'login__en_success') ,200)->header('Access-Control-Expose-Headers','token')->header('token',$token);
             }else{
@@ -63,6 +69,11 @@ class HouseController extends Controller
         return self::restResp('' ,'invalid params' ,App::BUSINESS_EXCEPTION_CODE);
     }
 
+    public function delay(){
+        for ($i=0;$i<15;$i++){
+            sleep(1);
+        }
+    }
 
     public function distributor($method ,Request $request){
         $http_method = $request->method();
