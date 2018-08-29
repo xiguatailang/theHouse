@@ -285,6 +285,13 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
     );
 
     public static $prefixesPsr0 = array (
+        'W' => 
+        array (
+            'Workman' => 
+            array (
+                0 => __DIR__ . '/..' . '/jimbojsb/workman/src',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -324,26 +331,37 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\LoginConsumer' => __DIR__ . '/../..' . '/app/Console/Commands/LoginConsumer.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Enumeration\\App' => __DIR__ . '/../..' . '/app/Enumeration/App.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Help\\Algorithm' => __DIR__ . '/../..' . '/app/Help/Algorithm.php',
+        'App\\Help\\HouseValid' => __DIR__ . '/../..' . '/app/Help/HouseValid.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
+        'App\\Http\\Controllers\\HouseController' => __DIR__ . '/../..' . '/app/Http/Controllers/HouseController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\UserFilter' => __DIR__ . '/../..' . '/app/Http/Middleware/UserFilter.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Incl\\BaseObject' => __DIR__ . '/../..' . '/app/Incl/BaseObject.php',
+        'App\\Incl\\Business\\Package' => __DIR__ . '/../..' . '/app/Incl/Business/Package.php',
+        'App\\Incl\\Business\\Player' => __DIR__ . '/../..' . '/app/Incl/Business/Player.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Services\\BaseService' => __DIR__ . '/../..' . '/app/Services/BaseService.php',
+        'App\\Services\\Business\\HouseDeleteService' => __DIR__ . '/../..' . '/app/Services/Business/HouseDeleteService.php',
+        'App\\Services\\Business\\HousePerformService' => __DIR__ . '/../..' . '/app/Services/Business/HousePerformService.php',
+        'App\\Services\\Business\\HousePutService' => __DIR__ . '/../..' . '/app/Services/Business/HousePutService.php',
         'App\\Services\\Business\\HouseService' => __DIR__ . '/../..' . '/app/Services/Business/HouseService.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -3777,8 +3795,12 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Symfony\\Thanks\\Thanks' => __DIR__ . '/..' . '/symfony/thanks/src/Thanks.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\HouseTest' => __DIR__ . '/../..' . '/tests/Feature/HouseTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
+        'Tests\\Unit\\HouseApiTest' => __DIR__ . '/../..' . '/tests/Unit/HouseApiTest.php',
+        'Tests\\Unit\\MakeJsonData' => __DIR__ . '/../..' . '/tests/Unit/MakeJsonData.php',
+        'Tests\\Unit\\ServiceTest' => __DIR__ . '/../..' . '/tests/Unit/ServiceTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
@@ -3813,6 +3835,8 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Workman\\CallbackQueue' => __DIR__ . '/..' . '/jimbojsb/workman/src/Workman/CallbackQueue.php',
+        'Workman\\Worker' => __DIR__ . '/..' . '/jimbojsb/workman/src/Workman/Worker.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',

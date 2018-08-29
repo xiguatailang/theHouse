@@ -17,13 +17,28 @@ class ServiceTest extends TestCase
     const USER_ID = 10000000000;
 
     public function testInit(){
-        Player::getUserPackages(self::USER_ID);
+//        $this->getUserPackages();
+//        $this->getPackageMessage();
 //        $this->getUserCacheData();
 //        $this->writeMessage();
+        $this->getUserCacheData();
+    }
+
+    public function getUserPackages(){
+        $_REQUEST['message_time'] = time();
+        $data = Player::getUserPackages(self::USER_ID);
+        var_dump($data);
+    }
+
+    public function getPackageMessage(){
+        $_REQUEST['message_time'] = time();
+        $data = Player::getPackageMessages(1);
+        var_dump($data);
     }
 
     public function getUserCacheData(){
-        $user_data = Redis::get(App::USER_LOGIN_KEY.'_'.self::USER_ID);
+        $_REQUEST['message_time'] = time();
+        $user_data = Player::makeUserCacheData(self::USER_ID);
         echo "\n".$user_data."\n";
     }
 

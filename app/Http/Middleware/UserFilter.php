@@ -27,7 +27,8 @@ class UserFilter
             if($token == $data['token']){
                 Redis::Expire(App::USER_LOGIN_KEY.'_'.$user_id ,App::USER_LOGIN_EXPIRE_TIME);
                 $data['user_id'] = $user_id;
-                $_REQUEST['user'] = $data;
+                $_REQUEST = array_merge($_REQUEST ,$data);
+                $_REQUEST['message_time'] = isset($_REQUEST['message_time']) ? $_REQUEST['message_time'] : time();
                 return $next($request);
             }else{
                 return response()->json(array('data'=>false ,'code'=>App::BUSINESS_EXCEPTION_CODE ,'msg'=>'Login state exception!') ,200);

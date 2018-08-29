@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Services\Business;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+use App\Incl\Business\Player;
+
 
 
 class HouseController extends Controller
@@ -50,7 +52,6 @@ class HouseController extends Controller
                     'token'=>$token,
                     'name'=>$user[0]->name,
                     'sex'=>$user[0]->sex,
-                    'packages'=>null,
                     'messages'=>null,
                 );
                 Redis::set(App::USER_LOGIN_KEY.'_'.$user_id ,json_encode($user_tmp));

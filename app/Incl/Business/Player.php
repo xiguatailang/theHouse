@@ -23,15 +23,18 @@ class Player extends BaseObject
 //    public $fields = ['user_id' ,'name','age','sex','created_at','updated_at'];
 
     public static function get(){
-        return $_REQUEST['user'];
+        $user_id = $_REQUEST['user']['user_id'];
+        return Redis::get(App::USER_LOGIN_KEY.'_'.$user_id);
     }
 
     public static function getUserId(){
         return $_REQUEST['user']['user_id'];
     }
 
-    public static function getUserDbData($user_id){
-        return __FUNCTION__;
+    public static function makeUserCacheData($user_id){
+        $packages = self::getUserPackages($user_id);
+        $messages = self::getPackageMessages($user_id);
+        var_dump($packages,$messages);die;
     }
 
 
@@ -105,8 +108,9 @@ class Player extends BaseObject
 
     public static function getUserPackages($user_id){
 
-        $result = $packages_ids = array();
-        $user = DB::select('select * from packages where user_id = ? limit 10', [$user_id]);
+        $result = array();
+        $suffix = date('Ym' ,$_REQUEST['message_time']);
+        $user = DB::select('select * from packages_'.$suffix.' where user_id = ? ORDER BY created_at desc', [$user_id]);
         if($user){
             foreach ($user as $item){
                 $result[$item->id] = [
@@ -114,29 +118,28 @@ class Player extends BaseObject
                     'created_at'=>$item->created_at,
                     'content'=>$item->content,
                     'read_count'=>$item->read_count,
-                    'messages'=>null,
                 ];
-
-                $packages_ids[] = $item->id;
             }
         }
 
-        return array('packages'=>$result ,'packages_ids'=>$packages_ids);
+        return $result;
     }
 
 
-    public static function getUserMessages($user_id){
+    public static function getPackageMessages($package_id){
 
         $result = array();
-        $user = DB::select('select * from messages where  = ? limit 10', [$user_id]);
+        $suffix = date('Ym' ,$_REQUEST['message_time']);
+        $user = DB::select('select * from messages_'.$suffix.' where package_id  = ? ORDER BY write_at desc', [$package_id]);
+
         if($user){
             foreach ($user as $item){
-                $result[$item->id] = [
-                    'package_id'=>$item->id,
-                    'created_at'=>$item->created_at,
+                $result[$item->package_id][] = [
+                    'package_id'=>$item->package_id,
+                    'message_id'=>$item->id,
+                    'write_at'=>$item->write_at,
                     'content'=>$item->content,
-                    'read_count'=>$item->read_count,
-                    'messages'=>null,
+                    'read_at'=>$item->read_at,
                 ];
             }
         }
