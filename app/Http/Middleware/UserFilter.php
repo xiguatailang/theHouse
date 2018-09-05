@@ -26,8 +26,7 @@ class UserFilter
             $data = json_decode($data ,true);
             if($token == $data['token']){
                 Redis::Expire(App::USER_LOGIN_KEY.'_'.$user_id ,App::USER_LOGIN_EXPIRE_TIME);
-                $data['user_id'] = $user_id;
-                $_REQUEST = array_merge($_REQUEST ,$data);
+                $_REQUEST['user_id'] = $user_id;
                 $_REQUEST['message_time'] = isset($_REQUEST['message_time']) ? $_REQUEST['message_time'] : time();
                 return $next($request);
             }else{

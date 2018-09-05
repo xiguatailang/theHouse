@@ -25,9 +25,12 @@ class App
 
 
     const USER_LOGIN_KEY = 'login';
+    const LOGIN_SYNC_MAKE_USER_CACHE = 'login_sync_make_user_cache';
     const USER_LOGIN_EXPIRE_TIME = 3600;
 
     const LOGIN_POOL = 'house_login_pool';
+    const USER_NAME_POOL = 'user_name_pool';
+
 
 
 }

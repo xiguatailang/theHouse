@@ -11,6 +11,7 @@ use Tests\TestCase;
 use App\Enumeration\App;
 use Illuminate\Support\Facades\Redis;
 use App\Incl\Business\Player;
+use App\Incl\Business\Supervisor;
 
 class ServiceTest extends TestCase
 {
@@ -21,7 +22,11 @@ class ServiceTest extends TestCase
 //        $this->getPackageMessage();
 //        $this->getUserCacheData();
 //        $this->writeMessage();
-        $this->getUserCacheData();
+//        $this->getUserCacheData();
+//        $this->getUserMessage();
+        $this->reBuildUserNameCache();
+//        $this->startLoginScript();
+
     }
 
     public function getUserPackages(){
@@ -36,10 +41,16 @@ class ServiceTest extends TestCase
         var_dump($data);
     }
 
+    public function getUserMessage(){
+        $_REQUEST['message_time'] = time();
+        $data = Player::getUserMessages(self::USER_ID);
+        var_dump($data);
+    }
+
     public function getUserCacheData(){
         $_REQUEST['message_time'] = time();
         $user_data = Player::makeUserCacheData(self::USER_ID);
-        echo "\n".$user_data."\n";
+        echo var_dump($user_data);
     }
 
     public function writePackage(){
@@ -64,9 +75,14 @@ class ServiceTest extends TestCase
         var_dump(array_merge($b,$a));die;
     }
 
-    public function getAllMessages(){
-
+    public function reBuildUserNameCache(){
+        $data = Supervisor::reBuildUserNameCache();
+        echo  $data;
     }
 
+    public function startLoginScript(){
+        $data = Supervisor::startLoginScript();
+        echo  $data;
+    }
 
 }

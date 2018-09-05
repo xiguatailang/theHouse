@@ -48,12 +48,17 @@ class HouseController extends Controller
                 $user_id = $user[0]->user_id;
                 $token = Algorithm::tokenEncrypt($user_id);
 
+//                $user_messages = Player::makeUserCacheData($user_id);
+
                 $user_tmp = array(
                     'token'=>$token,
                     'name'=>$user[0]->name,
                     'sex'=>$user[0]->sex,
+                    'not_read'=>0,
                     'messages'=>null,
                 );
+
+
                 Redis::set(App::USER_LOGIN_KEY.'_'.$user_id ,json_encode($user_tmp));
                 //TODO 同一个key，再次set之后会刷新过期时间。如果不设置过期时间则不会过期
                 Redis::Expire(App::USER_LOGIN_KEY.'_'.$user_id ,App::USER_LOGIN_EXPIRE_TIME);

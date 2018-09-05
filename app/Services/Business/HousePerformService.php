@@ -35,6 +35,24 @@ class HousePerformService extends BaseService{
     }
 
     /**
+     * 进入前端，查询未读区的信息条数
+     * @return int
+     */
+    public function getNewMessages(){
+        $user_id = Player::getUserId();
+        $count = 0;
+        if(!Player::isUserInitCache($user_id)){
+            sleep(App::LOGIN_SYNC_MAKE_USER_CACHE);
+        }
+        $user_data = Player::get();
+        if($user_data['messages']!==null) {
+            $count = $user_data['not_read'];
+        }
+
+        return array('data'=>$count);
+    }
+
+    /**
      *
      */
     public function writeUserPackage(){
@@ -76,42 +94,28 @@ class HousePerformService extends BaseService{
     }
 
      public function getUserMessage(){
-        $packages = array();
-        $user_id = Player::getUserId();
-        $data = Package::getUserMessageInbox($user_id);
-        foreach ($data as $datum){
-            $datum = json_decode($datum ,true);
-            $message = Package::getUserMessageOutbox($datum['writer'] ,$datum['message_offset']);
-            $message = json_decode($message,true);
-
-            $package_index = $datum['writer'].'_'.$message['package_offset'];
-            if(!isset($packages[$package_index])){
-                $package = Package::getUserPackageList($message['package_owner'] ,$message['package_offset']);
-                $packages[$package_index]['package'][] = $package;
-            }
-
-            $packages[$package_index]['message'][] = $message;
-        }
-
-
-        return array('data'=>$packages);
-     }
-
-
-     public function replyMessage(){
-
          $user_id = Player::getUserId();
-         $validContent = HouseValid::validContent($_REQUEST['content']);
-         if(!$validContent['result']){
-             return array('code'=>App::BUSINESS_EXCEPTION_CODE ,'msg'=>$validContent['msg']);
-         }
-         $reader = $_REQUEST['reader'];
-         $packageOffset = $_REQUEST['package_offset'];
-         $package_owner = $_REQUEST['package_owner'];
-         $data = Package::insertUserMessageOutbox($user_id,$validContent['content'],$reader,$packageOffset ,$package_owner);
-         return array('data'=>$data);
+         $user_cache = Redis::get(App::USER_LOGIN_KEY.'_'.$user_id);
+         $user_cache = json_decode($user_cache ,1);
 
+        return array('data'=>$user_cache['messages']);
      }
+
+
+//     public function replyMessage(){
+//
+//         $user_id = Player::getUserId();
+//         $validContent = HouseValid::validContent($_REQUEST['content']);
+//         if(!$validContent['result']){
+//             return array('code'=>App::BUSINESS_EXCEPTION_CODE ,'msg'=>$validContent['msg']);
+//         }
+//         $reader = $_REQUEST['reader'];
+//         $packageOffset = $_REQUEST['package_offset'];
+//         $package_owner = $_REQUEST['package_owner'];
+//         $data = Package::insertUserMessageOutbox($user_id,$validContent['content'],$reader,$packageOffset ,$package_owner);
+//         return array('data'=>$data);
+//
+//     }
 
 
 }

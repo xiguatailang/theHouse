@@ -29,6 +29,7 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         ),
         'W' => 
         array (
+            'Workerman\\' => 10,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -121,6 +122,10 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Workerman\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/workerman',
         ),
         'Whoops\\' => 
         array (
@@ -332,6 +337,7 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
 
     public static $classMap = array (
         'App\\Console\\Commands\\LoginConsumer' => __DIR__ . '/../..' . '/app/Console/Commands/LoginConsumer.php',
+        'App\\Console\\Commands\\buildUserNameCache' => __DIR__ . '/../..' . '/app/Console/Commands/buildUserNameCache.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Enumeration\\App' => __DIR__ . '/../..' . '/app/Enumeration/App.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -353,6 +359,7 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'App\\Incl\\BaseObject' => __DIR__ . '/../..' . '/app/Incl/BaseObject.php',
         'App\\Incl\\Business\\Package' => __DIR__ . '/../..' . '/app/Incl/Business/Package.php',
         'App\\Incl\\Business\\Player' => __DIR__ . '/../..' . '/app/Incl/Business/Player.php',
+        'App\\Incl\\Business\\Supervisor' => __DIR__ . '/../..' . '/app/Incl/Business/Supervisor.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -3835,6 +3842,32 @@ class ComposerStaticInitf1b38c2bdf82c88dc6508833cbfc495a
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Workerman\\Autoloader' => __DIR__ . '/..' . '/workerman/workerman/Autoloader.php',
+        'Workerman\\Connection\\AsyncTcpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/AsyncTcpConnection.php',
+        'Workerman\\Connection\\AsyncUdpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/AsyncUdpConnection.php',
+        'Workerman\\Connection\\ConnectionInterface' => __DIR__ . '/..' . '/workerman/workerman/Connection/ConnectionInterface.php',
+        'Workerman\\Connection\\TcpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/TcpConnection.php',
+        'Workerman\\Connection\\UdpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/UdpConnection.php',
+        'Workerman\\Events\\Ev' => __DIR__ . '/..' . '/workerman/workerman/Events/Ev.php',
+        'Workerman\\Events\\Event' => __DIR__ . '/..' . '/workerman/workerman/Events/Event.php',
+        'Workerman\\Events\\EventInterface' => __DIR__ . '/..' . '/workerman/workerman/Events/EventInterface.php',
+        'Workerman\\Events\\Libevent' => __DIR__ . '/..' . '/workerman/workerman/Events/Libevent.php',
+        'Workerman\\Events\\React\\Base' => __DIR__ . '/..' . '/workerman/workerman/Events/React/Base.php',
+        'Workerman\\Events\\React\\ExtEventLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/ExtEventLoop.php',
+        'Workerman\\Events\\React\\ExtLibEventLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/ExtLibEventLoop.php',
+        'Workerman\\Events\\React\\StreamSelectLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/StreamSelectLoop.php',
+        'Workerman\\Events\\Select' => __DIR__ . '/..' . '/workerman/workerman/Events/Select.php',
+        'Workerman\\Events\\Swoole' => __DIR__ . '/..' . '/workerman/workerman/Events/Swoole.php',
+        'Workerman\\Lib\\Timer' => __DIR__ . '/..' . '/workerman/workerman/Lib/Timer.php',
+        'Workerman\\Protocols\\Frame' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Frame.php',
+        'Workerman\\Protocols\\Http' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http.php',
+        'Workerman\\Protocols\\HttpCache' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http.php',
+        'Workerman\\Protocols\\ProtocolInterface' => __DIR__ . '/..' . '/workerman/workerman/Protocols/ProtocolInterface.php',
+        'Workerman\\Protocols\\Text' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Text.php',
+        'Workerman\\Protocols\\Websocket' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Websocket.php',
+        'Workerman\\Protocols\\Ws' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Ws.php',
+        'Workerman\\WebServer' => __DIR__ . '/..' . '/workerman/workerman/WebServer.php',
+        'Workerman\\Worker' => __DIR__ . '/..' . '/workerman/workerman/Worker.php',
         'Workman\\CallbackQueue' => __DIR__ . '/..' . '/jimbojsb/workman/src/Workman/CallbackQueue.php',
         'Workman\\Worker' => __DIR__ . '/..' . '/jimbojsb/workman/src/Workman/Worker.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',

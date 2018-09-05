@@ -25,6 +25,7 @@ class LoginConsumer extends Command
      */
     protected $description = 'make user cache from list';
 
+
     /**
      * Create a new command instance.
      *
@@ -47,16 +48,14 @@ class LoginConsumer extends Command
             if($user_id){
                 $user_data = Redis::get(App::USER_LOGIN_KEY.'_'.$user_id);
                 $user_data = json_decode($user_data ,true);
-                if($user_data['packages']===null) {
-                    $user_packages = Player::getUserPackages($user_id);
-                    $user_messages = Player::getUserMessages($user_id);
-                    $user_data['packages'] = $user_packages;
-                    $user_data['messages'] = $user_messages;
-                    Redis::set(App::USER_LOGIN_KEY.'_'.$user_id ,json_encode($user_data));
+
+                if($user_data['messages']===null) {
+                    Player::makeUserCacheData($user_id);
+                    echo $user_id." done \n";
                 }
             }else{
                 echo 'no'."\n";
-                sleep(10);
+                sleep(App::LOGIN_SYNC_MAKE_USER_CACHE);
             }
         }
     }
