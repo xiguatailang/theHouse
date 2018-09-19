@@ -35,14 +35,14 @@ class HousePerformService extends BaseService{
     }
 
     /**
-     * 进入前端，查询未读区的信息条数
+     * 进入前端，查询未读取的信息条数
      * @return int
      */
     public function getNewMessages(){
         $user_id = Player::getUserId();
         $count = 0;
         if(!Player::isUserInitCache($user_id)){
-            sleep(App::LOGIN_SYNC_MAKE_USER_CACHE);
+            sleep(App::LOGIN_SYNC_MAKE_USER_CACHE_TIME + 1);
         }
         $user_data = Player::get();
         if($user_data['messages']!==null) {
@@ -74,7 +74,16 @@ class HousePerformService extends BaseService{
 
     public function getProperPackage(){
         //获取一个读取次数最少的package
-        $data = Package::getProperUserPackage();
+        $data = Player::readProperPackageSort();
+
+        return array('data'=>$data);
+    }
+
+
+    public function getProperPackageId(){
+
+        $data = array();
+
         return array('data'=>$data);
     }
 
@@ -98,7 +107,20 @@ class HousePerformService extends BaseService{
          $user_cache = Redis::get(App::USER_LOGIN_KEY.'_'.$user_id);
          $user_cache = json_decode($user_cache ,1);
 
+//var_dump($user_cache['messages']);die;
         return array('data'=>$user_cache['messages']);
+     }
+
+     public function getPackageMessages(){
+        $result = array();
+        $package_id = isset($_REQUEST['package_id']) ? $_REQUEST['package_id'] : 0;
+        $cache_data = Player::get();
+        $messages = $cache_data['messages'];
+        if(isset($messages[$package_id]) && isset($messages[$package_id]['dialogue'])){
+            $result = $messages[$package_id]['dialogue'];
+        }
+
+         return array('data'=>$result);
      }
 
 

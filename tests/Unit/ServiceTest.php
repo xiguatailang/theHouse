@@ -22,9 +22,9 @@ class ServiceTest extends TestCase
 //        $this->getPackageMessage();
 //        $this->getUserCacheData();
 //        $this->writeMessage();
-//        $this->getUserCacheData();
+        $this->getUserCacheData();
 //        $this->getUserMessage();
-        $this->reBuildUserNameCache();
+//        $this->reBuildUserNameCache();
 //        $this->startLoginScript();
 
     }

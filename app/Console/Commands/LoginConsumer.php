@@ -55,7 +55,7 @@ class LoginConsumer extends Command
                 }
             }else{
                 echo 'no'."\n";
-                sleep(App::LOGIN_SYNC_MAKE_USER_CACHE);
+                sleep(App::LOGIN_SYNC_MAKE_USER_CACHE_TIME);
             }
         }
     }

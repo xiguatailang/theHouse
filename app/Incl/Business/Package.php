@@ -21,6 +21,7 @@ class Package extends BaseObject
     const PRIVATE = 1;
 
     const USER_PACKAGE_LIST = 'package_list';
+    const USER_MESSAGE_LIST = 'message_list';
     const USER_PACKAGE_POOL = 'package_pool';
     const USER_MESSAGE_OUTBOX = 'user_message_outbox';          //自己写
     const USER_MESSAGE_INBOX = 'user_message_inbox';            //读取
@@ -38,6 +39,11 @@ class Package extends BaseObject
         return array('data' => $this->name);
     }
 
+    /* 改版后需要的方法 */
+
+
+    /* 改版后需要的方法 */
+
 
     /**
      * list
@@ -46,7 +52,7 @@ class Package extends BaseObject
     public static function getProperUserPackage()
     {
 
-        if ($data = Redis::ZREVRANGEBYSCORE(self::USER_PACKAGE_POOL, INF, -INF)) {
+        if ($data = Redis::ZREVRANGEBYSCORE(self::USER_PACKAGE_POOL, INF, -INF ,WITHSCORES)) {
             $target = array_pop($data);
             $target = explode('_', $target);
             if($target[0] != Player::getUserId()) {
