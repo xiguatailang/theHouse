@@ -94,12 +94,21 @@ class MessageServer extends Command
                                 $this->work->connections[$reader]->send(json_encode($result));
                             }
 
-                            return ;
+                            //当用户读取一封他人信件，会在package hash里记录一个是否reply的状态。这里回复里就会将状态置为1
+                            if(isset($ws_data['first_reply']) && $ws_data['first_reply']){
+                                $hData['reply'] = 1;
+                                Redis::HSET(Player::USER_PROPER_PACKAGE_HASH, $user_id, json_encode($hData));
+                            }
+
                         }else{
                             $result['msg'] = 'invalid param';
                         }
                     }
                 }
+            }
+
+            if($data == 'connect'){
+                $result['code'] = App::BUSINESS_SUCCESS_CODE;
             }
 
             $connection->send(json_encode($result));

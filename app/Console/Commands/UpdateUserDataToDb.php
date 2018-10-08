@@ -76,7 +76,8 @@ class UpdateUserDataToDb extends Command
                         'content'=>$message['content'],
                         'write_at'=>$message['write_at'],
                     ];
-                    DB::table('messages_'.$suffix)->insert($insert);
+
+                    DB::table('messages_' . $suffix)->insert($insert);
                     $user_ids[] = $message['writer'];
                     $user_ids[] = $message['reader'];
                 }

@@ -79,11 +79,19 @@ class HousePerformService extends BaseService{
         return array('data'=>$data);
     }
 
+//    public function replyProperPackage(){
+//
+//
+//    }
+
 
     public function getProperPackageId(){
 
-        $data = array();
+        if(!isset($_REQUEST['created_at']) || !isset($_REQUEST['writer_id'])){
+            return array('data'=>false);
+        }
 
+        $data = Player::getProperPackageId($_REQUEST['writer_id'] ,$_REQUEST['created_at']);
         return array('data'=>$data);
     }
 
@@ -116,6 +124,7 @@ class HousePerformService extends BaseService{
         $package_id = isset($_REQUEST['package_id']) ? $_REQUEST['package_id'] : 0;
         $cache_data = Player::get();
         $messages = $cache_data['messages'];
+
         if(isset($messages[$package_id]) && isset($messages[$package_id]['dialogue'])){
             $result = $messages[$package_id]['dialogue'];
         }

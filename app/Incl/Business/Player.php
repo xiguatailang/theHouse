@@ -237,13 +237,13 @@ class Player extends BaseObject
         $score = 0;
         //将合适的package存入 用户读取合适package的hash列表里。优先读取列表。没有再从有序集合里取数据
         if( $proper = Redis::HGET(self::USER_PROPER_PACKAGE_HASH, $user_id) ){
+
             $proper = json_decode($proper ,true);
             if(!$proper['reply']){
                 $proper['writer_name'] = Redis::HGET(App::USER_NAME_POOL, $proper['writer_id']);
                 $proper['created_at_f'] = date('Y.m.d', $proper['created_at']);
                 return $proper;
             }
-            return $content;
         }
 
         if ($data = Redis::ZREVRANGEBYSCORE(self::USER_PACKAGE_SORT, INF, -INF ,'WITHSCORES')) {
@@ -284,7 +284,10 @@ class Player extends BaseObject
         $suffix = date('Ym' ,$_REQUEST['message_time']);
 
         $package = DB::select('select * from packages_'.$suffix.' where user_id = ? and created_at= ?', [$user_id ,$created_at]);
-        var_dump('as',$package);die;
+        if($package){
+            $package = array_pop($package);
+            return $package->id;
+        }
 
         return false;
     }
